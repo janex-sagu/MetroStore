@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetroStore UWP - Rediscover Windows 10 Mobile</title>
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --w10-blue: #0078D7;
+            --w10-black: #000000;
+            --w10-white: #FFFFFF;
+            --w10-gray-light: #F2F2F2;
+            --w10-gray-dark: #333333;
+            --font-family: 'Segoe UI', 'San Francisco', helvetica, arial, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: var(--font-family);
+            color: var(--w10-black);
+            background-color: var(--w10-white);
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* --- Header / Navigation --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid #e0e0e0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--w10-blue);
+        }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; }
+        .nav-links a:hover { color: var(--w10-blue); }
+
+        /* --- Hero Section (The Cool Minimalist Part) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--w10-white);
+            position: relative;
+            padding-top: 70px; /* Offset for fixed header */
+            
+            /* --- EDIT HERE: Background Image --- */
+            /* Upload 'pc-store-bg.jpg' to the same folder on GitHub */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('pc-store-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .btn-download-hero {
+            background-color: var(--w10-blue);
+            color: var(--w10-white);
+        }
+
+        .btn-download-hero:hover {
+            background-color: var(--w10-white);
+            color: var(--w10-blue);
+            transform: scale(1.05);
+        }
+
+        /* --- Showcase Section --- */
+        .showcase {
+            padding: 100px 0;
+            background-color: var(--w10-gray-light);
+            text-align: center;
+        }
+
+        .showcase h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .phone-mockup-container {
+            position: relative;
+            display: inline-block;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .phone-mockup-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* Thin shadow to make it pop */
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+
+        /* A minimal faux-bezel/frame effect */
+        .phone-mockup-container::after {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--w10-black);
+            color: var(--w10-gray-light);
+            padding: 50px 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--w10-blue);
+            margin-bottom: 15px;
+        }
+
+        .btn-download-footer {
+            border-color: var(--w10-white);
+            color: var(--w10-white);
+            margin-top: 20px;
+        }
+
+        .btn-download-footer:hover {
+            background-color: var(--w10-white);
+            color: var(--w10-black);
+        }
+
+        /* --- Responsive Media Queries --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1rem; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.8rem; }
+            .phone-mockup-container { max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">MetroStore UWP</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#showcase">Showcase</a></li>
+                    <!-- EDIT HERE: Link 'Download' button directly to your file -->
+                    <li><a href="YOUR_DOWNLOAD_LINK_HERE" class="btn btn-download-hero">Download App</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>The Classic Windows Store. <br>Reborn for Mobile.</h1>
+            <p>Welcome to MetroStore UWP, the independent web app store for Windows 10 Mobile devices. Discover hundreds of applications and games designed for the platform you love.</p>
+            
+            <!-- EDIT HERE: Link 'Download' button directly to your file -->
+            <a href="YOUR_DOWNLOAD_LINK_HERE" class="btn btn-download-hero">Download MetroStore App</a>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <h2>Experience MetroStore on Lumia 950 XL</h2>
+            
+            <div class="phone-mockup-container">
+                <!-- EDIT HERE: Replace with your actual image path on GitHub -->
+                <!-- Upload 'lumia-950xl-store.png' to the same folder on GitHub -->
+                <img src="lumia-950xl-store.png" alt="MetroStore App running on Microsoft Lumia 950 XL">
+            </div>
+            
+            <p style="margin-top: 30px; font-weight: 300; color: var(--w10-gray-dark);">A familiar interface, curated for the modern enthusiast.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">MetroStore UWP</div>
+            <p>Your portal to Windows 10 Mobile applications.</p>
+            
+            <!-- EDIT HERE: Link 'Download' button directly to your file -->
+            <a href="YOUR_DOWNLOAD_LINK_HERE" class="btn btn-download-footer">Get the latest version</a>
+            
+            <p style="margin-top: 40px; opacity: 0.6; font-size: 0.7rem;">&copy; 2026 MetroStore UWP. An independent fan project. Not affiliated with Microsoft.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
